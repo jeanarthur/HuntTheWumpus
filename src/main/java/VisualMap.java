@@ -16,6 +16,10 @@ public class VisualMap {
     }
 
     public void createVisualConnection(Cave from, Cave to) {
+        if (to == null){
+            return;
+        }
+
         if (!elements.containsKey(from.toString())) {
             throw new IllegalArgumentException("Parameter 'from' can be previous registered on caveElements");
         }
@@ -48,7 +52,7 @@ public class VisualMap {
         int mapWidth = getWidth();
         String[][] map = new String[mapHeight][mapWidth];
 
-        System.out.printf("Dimensões: %d x %d\n", mapHeight, mapWidth);
+        // System.out.printf("Dimensões: %d x %d\n", mapHeight, mapWidth);
 
         for (MapElement mapElement : elements.values()){
             map[Math.abs(mapElement.y - fixY)][mapElement.x + fixX] = mapElement.symbol;

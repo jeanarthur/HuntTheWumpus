@@ -55,4 +55,42 @@ public class Cave {
     public void setEnemy(Enemy enemy) {
         this.enemy = enemy;
     }
+
+    public Cave get(Coordinates coordinate){
+        switch (coordinate){
+            case NORTH -> {
+                return this.getNorth();
+            }
+            case SOUTH -> {
+                return this.getSouth();
+            }
+            case EAST -> {
+                return this.getEast();
+            }
+            case WEST -> {
+                return this.getWest();
+            }
+        }
+
+        return null;
+    }
+
+    public void set(Cave cave, Coordinates coordinate) {
+        switch (coordinate){
+            case NORTH -> this.north = cave;
+            case SOUTH -> this.south = cave;
+            case EAST -> this.east = cave;
+            case WEST -> this.west = cave;
+        }
+    }
+
+    public String objectToString() {
+        return this + "{" +
+                "north=" + north +
+                ", south=" + south +
+                ", east=" + east +
+                ", west=" + west +
+                ", enemy=" + enemy +
+                '}';
+    }
 }
