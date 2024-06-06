@@ -47,6 +47,12 @@ public class VisualMap {
         }
     }
 
+    public void updateElementSymbol(Cave cave, String symbol) {
+        MapElement mapElement = elements.get(cave.toString());
+        mapElement.symbol = symbol;
+        elements.put(cave.toString(), mapElement);
+    }
+
     public void print() {
         int mapHeight = getHeight();
         int mapWidth = getWidth();

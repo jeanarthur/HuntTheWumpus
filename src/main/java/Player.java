@@ -1,9 +1,11 @@
 public class Player {
 
-    Cave current;
+    Cave currentCave;
 
     public void navigate(Coordinates coordinates) {
-
+        this.currentCave = currentCave.get(coordinates);
     }
+
+
 
 }

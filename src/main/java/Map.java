@@ -7,12 +7,19 @@ public class Map {
     Cave root;
     int size;
     private VisualMap visualMap;
+    private Player player;
 
     public Map() {
         this.root = new Cave();
         this.size = 1;
 
         this.visualMap = new VisualMap(this.root);
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+        this.player.currentCave = this.root;
+        this.visualMap.updateElementSymbol(this.root, "P");
     }
 
     public int randInt(int min, int max) {
@@ -78,6 +85,10 @@ public class Map {
         if (parentOppositeClockwiseCoordinateCave != null){
             connectCaves(parentOppositeClockwiseCoordinateCave.get(coordinate), newCave, parentClockwiseCoordinate);
         }
+    }
+
+    public VisualMap getVisualMap() {
+        return visualMap;
     }
 
     public void print() {

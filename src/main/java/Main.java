@@ -3,9 +3,9 @@ public class Main {
     public static void main(String[] args) {
 
 // Teste Menu
-//        GameController gameController = new GameController();
-//
-//        gameController.start();
+        GameController gameController = new GameController();
+
+        gameController.start();
 
 // Teste do VisualMap
 //        Cave root = new Cave();
@@ -39,9 +39,9 @@ public class Main {
 //        visualMap.print();
 
         // Teste Geração de Mapa
-        Map map = new Map();
-        map.generate();
-        map.print();
+//        Map map = new Map();
+//        map.generate();
+//        map.print();
 
     }
 

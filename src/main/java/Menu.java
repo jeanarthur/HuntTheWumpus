@@ -3,7 +3,7 @@ public class Menu {
     Output output = new Output();
     Input input = new Input();
 
-    public void show() {
+    public MenuOptions show() {
         output.showMenu();
         output.requestInput();
 
@@ -12,23 +12,27 @@ public class Menu {
             option = input.getInteger();
         } catch (NumberFormatException e) {
             output.showInputError();
-            show();
-            return;
+            return show();
         }
 
         switch (option){
-            case 1 -> output.startGameMessage();
+            case 1 -> {
+                output.startGameMessage();
+                return MenuOptions.PLAY;
+            }
             case 2 -> {
                 output.showRules();
-                show();
+                return show();
             }
-            case 3 -> output.showExitMessage();
+            case 3 -> {
+                output.showExitMessage();
+                return MenuOptions.EXIT;
+            }
             default -> {
                 output.showInputError();
-                show();
+                return show();
             }
         }
-
     }
 
 }
