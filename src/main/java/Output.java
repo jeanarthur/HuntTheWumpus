@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.Map;
+
 public class Output {
 
     public void showMenu() {
@@ -26,6 +29,19 @@ public class Output {
 
     public void startGameMessage() {
         System.out.println("Jogo iniciado");
+    }
+
+    public void listValidInputs(Map<String, ValidInput> validInputMap) {
+        for (ValidInput validInput : validInputMap.values()){
+            System.out.printf("%s -> %s\n", validInput.command, validInput.description);
+        }
+    }
+
+    public void showSeparator() {
+        System.out.println("========================");
+    }
+    public void requestAction() {
+        System.out.println("Escolha uma ação");
     }
 
 }

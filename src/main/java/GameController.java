@@ -1,4 +1,14 @@
+import java.util.Map;
+
 public class GameController {
+
+    Output output;
+    Input input;
+
+    public GameController(){
+        this.output = new Output();
+        this.input = new Input();
+    }
 
     public void start() {
         Menu menu = new Menu();
@@ -13,11 +23,37 @@ public class GameController {
 
         Player player = new Player();
 
-        Map map = new Map();
+        Maze map = new Maze();
         map.generate();
         map.setPlayer(player);
 
-        map.print();
+
+        while (true) {
+            Map<String, ValidInput> validInputMap = input.getValidInputMap(player.currentCave);
+
+            ValidInput userValidInput;
+            while (true) {
+                output.showSeparator();
+                map.print();
+                output.showSeparator();
+                output.requestAction();
+                output.listValidInputs(validInputMap);
+                output.requestInput();
+
+                String option = input.get();
+                userValidInput = validInputMap.get(option);
+                if (userValidInput != null){
+                    break;
+                }
+
+                output.showInputError();
+            }
+
+            if (userValidInput.value != null){
+                map.playerMoveTo((Coordinates) userValidInput.value);
+            }
+
+        }
 
     }
 
