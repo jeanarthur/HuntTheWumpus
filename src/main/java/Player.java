@@ -6,6 +6,4 @@ public class Player {
         this.currentCave = currentCave.get(coordinates);
     }
 
-
-
 }

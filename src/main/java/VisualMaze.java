@@ -4,6 +4,7 @@ import java.util.Map;
 public class VisualMaze {
 
     Map<String, MapElement> elements;
+    private boolean TRACK_PLAYER_MOVEMENT;
 
     private int fixX;
     private int fixY;
@@ -11,6 +12,8 @@ public class VisualMaze {
     public VisualMaze(Cave root) {
         this.elements = new HashMap<>();
         this.elements.put(root.toString(), new MapElement("C", 0, 0));
+
+        this.TRACK_PLAYER_MOVEMENT = true;
     }
 
     public void createVisualConnection(Cave from, Cave to) {
@@ -51,6 +54,41 @@ public class VisualMaze {
         elements.put(cave.toString(), mapElement);
     }
 
+    public void updateElementSymbol(Cave cave, String symbol, Color color) {
+        MapElement mapElement = elements.get(cave.toString());
+        mapElement.symbol = symbol;
+        mapElement.color = color;
+        elements.put(cave.toString(), mapElement);
+    }
+
+    public void updateElementSymbol(String elementId, String symbol, Color color){
+        MapElement mapElement = elements.get(elementId);
+        mapElement.symbol = symbol;
+        mapElement.color = color;
+        elements.put(elementId, mapElement);
+    }
+
+    public void updateElementColor(String elementId, Color color){
+        MapElement mapElement = elements.get(elementId);
+        mapElement.color = color;
+        elements.put(elementId, mapElement);
+    }
+
+    public void registerPlayerMovement(Cave from, Cave to) {
+        this.updateElementSymbol(from, "C", Color.RESET);
+        this.updateElementSymbol(to, "P", Color.YELLOW);
+
+        if (this.TRACK_PLAYER_MOVEMENT){
+            MapElement mapElement = elements.get(from + to.toString());
+            if (mapElement != null){
+                updateElementColor(from + to.toString(), Color.CYAN);
+            } else {
+                updateElementColor(to + from.toString(), Color.CYAN);
+            }
+            updateElementColor(from.toString(), Color.CYAN);
+        }
+    }
+
     public void print() {
         int mapHeight = getHeight();
         int mapWidth = getWidth();
@@ -59,7 +97,7 @@ public class VisualMaze {
         // System.out.printf("Dimensões: %d x %d\n", mapHeight, mapWidth);
 
         for (MapElement mapElement : elements.values()){
-            map[Math.abs(mapElement.y - fixY)][mapElement.x + fixX] = mapElement.symbol;
+            map[Math.abs(mapElement.y - fixY)][mapElement.x + fixX] = (mapElement.color != null ? mapElement.color.value() : "") + mapElement.symbol + Color.RESET.value();
         }
 
         for (int i = 0; i < mapHeight; i++) {

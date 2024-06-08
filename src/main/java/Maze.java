@@ -19,7 +19,7 @@ public class Maze {
     public void setPlayer(Player player) {
         this.player = player;
         this.player.currentCave = this.root;
-        this.visualMaze.updateElementSymbol(this.root, "P");
+        this.visualMaze.updateElementSymbol(this.root, "P", Color.YELLOW);
     }
 
     public int randInt(int min, int max) {
@@ -92,9 +92,9 @@ public class Maze {
     }
 
     public void playerMoveTo (Coordinates coordinate){
-        this.visualMaze.updateElementSymbol(this.player.currentCave, "C");
+        Cave from = this.player.currentCave;
         this.player.navigate(coordinate);
-        this.visualMaze.updateElementSymbol(this.player.currentCave, "P");
+        this.visualMaze.registerPlayerMovement(from, this.player.currentCave);
     }
 
     public void print() {
