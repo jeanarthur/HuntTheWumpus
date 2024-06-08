@@ -1,16 +1,14 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class VisualMap {
+public class VisualMaze {
 
     Map<String, MapElement> elements;
 
     private int fixX;
     private int fixY;
 
-    public VisualMap(Cave root) {
+    public VisualMaze(Cave root) {
         this.elements = new HashMap<>();
         this.elements.put(root.toString(), new MapElement("C", 0, 0));
     }

@@ -2,24 +2,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Map {
+public class Maze {
 
     Cave root;
     int size;
-    private VisualMap visualMap;
+    private VisualMaze visualMaze;
     private Player player;
 
-    public Map() {
+    public Maze() {
         this.root = new Cave();
         this.size = 1;
 
-        this.visualMap = new VisualMap(this.root);
+        this.visualMaze = new VisualMaze(this.root);
     }
 
     public void setPlayer(Player player) {
         this.player = player;
         this.player.currentCave = this.root;
-        this.visualMap.updateElementSymbol(this.root, "P");
+        this.visualMaze.updateElementSymbol(this.root, "P");
     }
 
     public int randInt(int min, int max) {
@@ -71,7 +71,7 @@ public class Map {
 
         parent.set(newCave, coordinate);
         newCave.set(parent, parentCoordinate);
-        this.visualMap.createVisualConnection(parent, newCave);
+        this.visualMaze.createVisualConnection(parent, newCave);
 
         Coordinates parentClockwiseCoordinate = Coordinates.getNextClockwiseCoordinate(coordinate);
         Coordinates parentOppositeClockwiseCoordinate = Coordinates.getOpposite(parentClockwiseCoordinate);
@@ -87,12 +87,18 @@ public class Map {
         }
     }
 
-    public VisualMap getVisualMap() {
-        return visualMap;
+    public VisualMaze getVisualMaze() {
+        return visualMaze;
+    }
+
+    public void playerMoveTo (Coordinates coordinate){
+        this.visualMaze.updateElementSymbol(this.player.currentCave, "C");
+        this.player.navigate(coordinate);
+        this.visualMaze.updateElementSymbol(this.player.currentCave, "P");
     }
 
     public void print() {
-        this.visualMap.print();
+        this.visualMaze.print();
     }
 
 }
