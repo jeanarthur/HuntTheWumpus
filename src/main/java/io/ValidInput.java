@@ -1,7 +1,9 @@
+package io;
+
 public class ValidInput {
     String command;
     String description;
-    Enum value;
+    public Enum value;
 
     public ValidInput(String command, String description) {
         this.command = command;

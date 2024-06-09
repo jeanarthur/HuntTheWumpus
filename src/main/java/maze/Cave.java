@@ -1,3 +1,8 @@
+package maze;
+
+import entities.Enemy;
+import enums.Coordinates;
+
 public class Cave {
 
     private Cave north;

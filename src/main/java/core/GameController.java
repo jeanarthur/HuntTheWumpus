@@ -1,3 +1,16 @@
+package core;
+
+import entities.*;
+import enums.Coordinates;
+import enums.GameModes;
+import enums.GameStatus;
+import enums.MenuOptions;
+import io.Input;
+import io.Output;
+import io.ValidInput;
+import maze.Cave;
+import maze.Maze;
+
 import java.util.Map;
 
 public class GameController {
@@ -68,9 +81,9 @@ public class GameController {
                 break;
             }
 
-            if (userValidInput != null && userValidInput.value != null){
+            if (userValidInput.value != null){
                 map.playerMoveTo((Coordinates) userValidInput.value);
-            } else if (userValidInput != null) {
+            } else {
                 Map<String, ValidInput> validInputToArrow = input.getValidInputToArrow(player.currentCave);
                 userValidInput = null;
                 while (userValidInput == null) {

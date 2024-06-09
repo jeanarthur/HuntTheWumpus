@@ -1,3 +1,7 @@
+package maze;
+
+import enums.Coordinates;
+
 import java.util.Objects;
 
 public class Coordinate {

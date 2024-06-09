@@ -1,3 +1,10 @@
+package io;
+
+import enums.Coordinates;
+import enums.GameModes;
+
+import maze.Cave;
+
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Scanner;

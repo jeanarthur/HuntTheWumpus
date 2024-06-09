@@ -1,3 +1,9 @@
+package maze;
+
+import entities.*;
+import enums.Colors;
+import enums.GameModes;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +21,7 @@ public class VisualMaze {
 
     public VisualMaze(Cave root, GameModes gameMode) {
         this.elements = new HashMap<>();
-        this.elements.put(root.toString(), new MazeElement("R", 0, 0, Color.GREEN, !this.SHOW_ONLY_DISCOVERED_CAVES));
+        this.elements.put(root.toString(), new MazeElement("R", 0, 0, Colors.GREEN, !this.SHOW_ONLY_DISCOVERED_CAVES));
 
         switch (gameMode){
             case FULL_MAP -> {
@@ -91,21 +97,21 @@ public class VisualMaze {
 
         boolean hasDiscovered = mazeElement != null && mazeElement.discovered;
 
-        Class enemyClass = cave.getEnemy().getClass();
+        Class<? extends Enemy> enemyClass = cave.getEnemy().getClass();
         String symbol = "C";
-        Color color = Color.RESET;
+        Colors color = Colors.RESET;
         if (enemyClass.equals(Bat.class)) {
             symbol = (this.SHOW_ALL_CAVE_ENEMIES || (this.SHOW_DISCOVERED_ENEMIES && hasDiscovered)) ? "B" : symbol;
-            color = (this.SHOW_ALL_CAVE_ENEMIES || (this.SHOW_DISCOVERED_ENEMIES && hasDiscovered)) ? Color.PURPLE : color;
+            color = (this.SHOW_ALL_CAVE_ENEMIES || (this.SHOW_DISCOVERED_ENEMIES && hasDiscovered)) ? Colors.PURPLE : color;
         } else if (enemyClass.equals(Hole.class)){
             symbol = (this.SHOW_ALL_CAVE_ENEMIES || (this.SHOW_DISCOVERED_ENEMIES && hasDiscovered)) ? "P" : symbol;
-            color = (this.SHOW_ALL_CAVE_ENEMIES || (this.SHOW_DISCOVERED_ENEMIES && hasDiscovered)) ? Color.BLUE : color;
+            color = (this.SHOW_ALL_CAVE_ENEMIES || (this.SHOW_DISCOVERED_ENEMIES && hasDiscovered)) ? Colors.BLUE : color;
         } else if (enemyClass.equals(Wumpus.class)) {
             symbol = (this.SHOW_ALL_CAVE_ENEMIES || (this.SHOW_DISCOVERED_ENEMIES && hasDiscovered)) ? "W" : symbol;
-            color = (this.SHOW_ALL_CAVE_ENEMIES || (this.SHOW_DISCOVERED_ENEMIES && hasDiscovered)) ? Color.RED : color;
+            color = (this.SHOW_ALL_CAVE_ENEMIES || (this.SHOW_DISCOVERED_ENEMIES && hasDiscovered)) ? Colors.RED : color;
         } else if (enemyClass.equals(Arrow.class)){
             symbol = (this.SHOW_ALL_CAVE_ENEMIES) ? "F" : symbol;
-            color = (this.SHOW_ALL_CAVE_ENEMIES) ? Color.GREEN : color;
+            color = (this.SHOW_ALL_CAVE_ENEMIES) ? Colors.GREEN : color;
         }
 
         return new MazeElement(symbol, x, y, color, hasVisible);
@@ -117,14 +123,14 @@ public class VisualMaze {
         elements.put(cave.toString(), updatedElement);
     }
 
-    public void updateElementSymbol(Cave cave, String symbol, Color color) {
+    public void updateElementSymbol(Cave cave, String symbol, Colors color) {
         MazeElement mazeElement = elements.get(cave.toString());
         mazeElement.symbol = symbol;
         mazeElement.color = color;
         elements.put(cave.toString(), mazeElement);
     }
 
-    public void updateElementColor(String elementId, Color color){
+    public void updateElementColor(String elementId, Colors color){
         MazeElement mazeElement = elements.get(elementId);
         mazeElement.color = color;
         elements.put(elementId, mazeElement);
@@ -137,22 +143,22 @@ public class VisualMaze {
 
         elements.get(to.toString()).visible = true;
         elements.get(to.toString()).discovered = true;
-        this.updateElementSymbol(to, "P", Color.YELLOW);
+        this.updateElementSymbol(to, "P", Colors.YELLOW);
 
         if (this.TRACK_PLAYER_MOVEMENT){
             MazeElement mazeElement = elements.get(from + to.toString());
             if (mazeElement != null){
                 mazeElement.visible = true;
                 mazeElement.discovered = true;
-                updateElementColor(from + to.toString(), Color.CYAN);
+                updateElementColor(from + to.toString(), Colors.CYAN);
             } else if (elements.get(to + from.toString()) != null) {
                 elements.get(to + from.toString()).visible = true;
                 elements.get(to + from.toString()).discovered = true;
-                updateElementColor(to + from.toString(), Color.CYAN);
+                updateElementColor(to + from.toString(), Colors.CYAN);
             }
 
             if ((!this.SHOW_ALL_CAVE_ENEMIES && !this.SHOW_DISCOVERED_ENEMIES) || elements.get(from.toString()).symbol.equals("C")){
-                updateElementColor(from.toString(), Color.CYAN);
+                updateElementColor(from.toString(), Colors.CYAN);
             }
         }
     }
@@ -168,7 +174,7 @@ public class VisualMaze {
 
         for (MazeElement mazeElement : elements.values()){
             if (mazeElement.visible){
-                map[Math.abs(mazeElement.y - fixY)][mazeElement.x + fixX] = (mazeElement.color != null ? mazeElement.color.value() : "") + mazeElement.symbol + Color.RESET.value();
+                map[Math.abs(mazeElement.y - fixY)][mazeElement.x + fixX] = (mazeElement.color != null ? mazeElement.color.value() : "") + mazeElement.symbol + Colors.RESET.value();
             }
         }
 

@@ -1,3 +1,10 @@
+package maze;
+
+import entities.*;
+import enums.Colors;
+import enums.Coordinates;
+import enums.GameModes;
+
 import java.util.*;
 
 public class Maze {
@@ -7,7 +14,7 @@ public class Maze {
     private final VisualMaze visualMaze;
     private Player player;
     private final Map<String, Cave> caves;
-    int cavesWithArrows;
+    public int cavesWithArrows;
 
     public Maze(GameModes gameMode) {
         this.root = new Cave(new Coordinate(0, 0));
@@ -22,7 +29,7 @@ public class Maze {
     public void setPlayer(Player player) {
         this.player = player;
         this.player.currentCave = this.root;
-        this.visualMaze.updateElementSymbol(this.root, "P", Color.YELLOW);
+        this.visualMaze.updateElementSymbol(this.root, "P", Colors.YELLOW);
     }
 
     public Player getPlayer(){

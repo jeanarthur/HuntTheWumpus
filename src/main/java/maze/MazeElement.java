@@ -1,7 +1,11 @@
+package maze;
+
+import enums.Colors;
+
 public class MazeElement {
 
     String symbol;
-    Color color;
+    Colors color;
     int x;
     int y;
     boolean visible;
@@ -15,7 +19,7 @@ public class MazeElement {
         this.discovered = false;
     }
 
-    public MazeElement(String symbol, int x, int y, Color color, boolean visible) {
+    public MazeElement(String symbol, int x, int y, Colors color, boolean visible) {
         this.symbol = symbol;
         this.x = x;
         this.y = y;

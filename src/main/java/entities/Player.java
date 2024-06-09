@@ -1,7 +1,12 @@
+package entities;
+
+import enums.Coordinates;
+import maze.Cave;
+
 public class Player {
 
-    Cave currentCave;
-    int arrows;
+    public Cave currentCave;
+    public int arrows;
 
     public Player(){
         this.arrows = 1;

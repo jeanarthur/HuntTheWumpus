@@ -1,3 +1,8 @@
+package io;
+
+import entities.Player;
+import enums.Colors;
+
 import java.util.Map;
 
 public class Output {
@@ -60,11 +65,11 @@ public class Output {
     }
 
     public void showDefeatedByWumpusMessage() {
-        System.out.println(Color.RED.value() + "O Wumpus capturou o player" + Color.RESET.value());
+        System.out.println(Colors.RED.value() + "O Wumpus capturou o player" + Colors.RESET.value());
     }
 
     public void showDefeatedByHoleMessage() {
-        System.out.println(Color.RED.value() + "O Player caiu em um poço sem fundo" + Color.RESET.value());
+        System.out.println(Colors.RED.value() + "O Player caiu em um poço sem fundo" + Colors.RESET.value());
     }
 
     public void showNearWumpusMessage() {
@@ -85,7 +90,7 @@ public class Output {
     }
 
     public void showPlayerGetArrowMessage() {
-        System.out.println(Color.GREEN.value() + "Player encontrou uma flecha" + Color.RESET.value());
+        System.out.println(Colors.GREEN.value() + "Player encontrou uma flecha" + Colors.RESET.value());
     }
 
     public void showPlayerArrowCount(Player player){
@@ -97,10 +102,10 @@ public class Output {
     }
 
     public void showDefeatedWumpusMessage() {
-        System.out.println(Color.GREEN.value() + "Capturou o Wumpus" + Color.RESET.value());
+        System.out.println(Colors.GREEN.value() + "Capturou o Wumpus" + Colors.RESET.value());
     }
 
     public void showNoArrowsAvailableMessage() {
-        System.out.println(Color.RED.value() + "Acabou as flechas do player e não há mais flechas no mapa" + Color.RESET.value());
+        System.out.println(Colors.RED.value() + "Acabou as flechas do player e não há mais flechas no mapa" + Colors.RESET.value());
     }
 }

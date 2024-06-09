@@ -1,3 +1,5 @@
+package enums;
+
 public enum GameModes {
 
     FULL_MAP,

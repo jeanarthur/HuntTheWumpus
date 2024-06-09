@@ -1,4 +1,6 @@
-enum Color {
+package enums;
+
+public enum Colors {
     RESET("\u001B[0m"),
     BLACK("\u001B[30m"),
     RED("\u001B[31m"),
@@ -11,7 +13,7 @@ enum Color {
 
     final String key;
 
-    Color(String str) {
+    Colors(String str) {
         key = str;
     }
 
