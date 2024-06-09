@@ -1,3 +1,5 @@
+import java.util.Map;
+
 public class Menu {
 
     Output output = new Output();
@@ -33,6 +35,27 @@ public class Menu {
                 return show();
             }
         }
+    }
+
+    public GameModes showGameModes() {
+        Map<String, ValidInput> validInputMap = input.getValidGameModeInput();
+
+        ValidInput validInput = null;
+        while (validInput == null){
+            output.requestGameModeSelection();
+            output.listValidInputs(validInputMap);
+            output.requestInput();
+
+            validInput = validInputMap.get(input.get());
+
+            if (validInput != null && validInput.value != null){
+                return (GameModes)validInput.value;
+            }
+
+            output.showInputError();
+        }
+
+        return GameModes.FULL_MAP;
     }
 
 }

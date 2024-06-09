@@ -60,5 +60,15 @@ public class Input {
         return validInputMap;
     }
 
+    public Map<String, ValidInput> getValidGameModeInput(){
+        Map<String, ValidInput> validInputMap = new HashMap<>();
+
+        validInputMap.put("1", new ValidInput("1", "Mapa completo visível desde o começo", GameModes.FULL_MAP));
+        validInputMap.put("2", new ValidInput("2", "Mostra o mapa a medida que caminha por ele", GameModes.PATH_MAP));
+        validInputMap.put("3", new ValidInput("3", "Nenhum mapa é exibido", GameModes.WITHOUT_MAP));
+        validInputMap.put("4", new ValidInput("4", "Eu vejo de tudo!", GameModes.WALL_HACK));
+
+        return validInputMap;
+    }
 
 }

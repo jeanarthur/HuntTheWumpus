@@ -13,18 +13,21 @@ public class GameController {
 
     public void start() {
         Menu menu = new Menu();
-        MenuOptions menuOption = menu.show();
-
-        if (menuOption == MenuOptions.PLAY) {
-            play();
+        MenuOptions menuOption = null;
+        while (menuOption != MenuOptions.EXIT){
+            menuOption = menu.show();
+            if (menuOption == MenuOptions.PLAY) {
+                GameModes gameMode = menu.showGameModes();
+                play(gameMode);
+            }
         }
     }
 
-    private void play() {
+    private void play(GameModes gameMode) {
 
         Player player = new Player();
 
-        Maze map = new Maze();
+        Maze map = new Maze(gameMode);
         map.generate();
         map.setPlayer(player);
 
@@ -34,14 +37,11 @@ public class GameController {
 
             ValidInput userValidInput = null;
             while (userValidInput == null) {
+
                 output.showSeparator();
                 map.print();
                 output.showSeparator();
                 reportStatus(map);
-
-                if (this.gameStatus == GameStatus.CAPTURED_BY_BAT){
-                    break;
-                }
 
                 if (this.gameStatus != GameStatus.RUNNING){
                     break;
@@ -64,9 +64,13 @@ public class GameController {
                 continue;
             }
 
+            if (this.gameStatus != GameStatus.RUNNING){
+                break;
+            }
+
             if (userValidInput != null && userValidInput.value != null){
                 map.playerMoveTo((Coordinates) userValidInput.value);
-            } else {
+            } else if (userValidInput != null) {
                 Map<String, ValidInput> validInputToArrow = input.getValidInputToArrow(player.currentCave);
                 userValidInput = null;
                 while (userValidInput == null) {
@@ -110,7 +114,7 @@ public class GameController {
 
         Enemy currentEnemy = current.getEnemy();
         if (currentEnemy != null && currentEnemy.getClass().equals(Wumpus.class)){
-            output.showDiedByWumpusMessage();
+            output.showDefeatedByWumpusMessage();
             this.gameStatus = GameStatus.DEFEATED_BY_WUMPUS;
             return;
         } else if (currentEnemy != null && currentEnemy.getClass().equals(Hole.class)){

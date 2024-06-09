@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.Map;
 
 public class Output {
@@ -15,12 +14,27 @@ public class Output {
         System.out.print("Digite: ");
     }
 
+    public void requestGameModeSelection() {
+        System.out.println("Escolha um modo de jogo");
+    }
+
     public void showInputError() {
         System.out.println("Opção inválida, tente novamente");
     }
 
     public void showRules() {
         System.out.println("-- Regras --");
+        System.out.println("""
+                Para iniciar selecione Jogar e escolha o modo
+                Seu objetivo é atirar uma flecha no Wumpus, você inicia com 1 flecha e pode encontrar outras nas cavernas
+                Navegue pelas cavernas usando 'w','a','s' ou 'd' + Enter para cada movimento
+                use 'e' + Enter para atirar uma flecha e escolha a direção com 'w','a','s' ou 'd' + Enter
+                ---
+                Algumas dicas sobre as cavernas adjacentes são mostradas conforme caminha
+                morcegos te levarão para cavernas aleatórias
+                poços sem fundo são letais, assim como encontrar o Wumpus
+                ---
+                Divirta-se!""");
     }
 
     public void showExitMessage() {
@@ -40,16 +54,17 @@ public class Output {
     public void showSeparator() {
         System.out.println("========================");
     }
+
     public void requestAction() {
         System.out.println("Escolha uma ação");
     }
 
-    public void showDiedByWumpusMessage() {
-        System.out.println("O Wumpus capturou o player");
+    public void showDefeatedByWumpusMessage() {
+        System.out.println(Color.RED.value() + "O Wumpus capturou o player" + Color.RESET.value());
     }
 
     public void showDefeatedByHoleMessage() {
-        System.out.println("O Player caiu em um poço sem fundo");
+        System.out.println(Color.RED.value() + "O Player caiu em um poço sem fundo" + Color.RESET.value());
     }
 
     public void showNearWumpusMessage() {
@@ -70,7 +85,7 @@ public class Output {
     }
 
     public void showPlayerGetArrowMessage() {
-        System.out.println("Player encontrou uma flecha");
+        System.out.println(Color.GREEN.value() + "Player encontrou uma flecha" + Color.RESET.value());
     }
 
     public void showPlayerArrowCount(Player player){
@@ -82,7 +97,7 @@ public class Output {
     }
 
     public void showDefeatedWumpusMessage() {
-        System.out.println("Capturou o Wumpus");
+        System.out.println(Color.GREEN.value() + "Capturou o Wumpus" + Color.RESET.value());
     }
 
     public void showDefeatedBatMessage() {
@@ -90,6 +105,6 @@ public class Output {
     }
 
     public void showNoArrowsAvailableMessage() {
-        System.out.println("Acabou as flechas do player e não há mais flechas no mapa");
+        System.out.println(Color.RED.value() + "Acabou as flechas do player e não há mais flechas no mapa" + Color.RESET.value());
     }
 }

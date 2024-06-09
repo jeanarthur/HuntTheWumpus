@@ -9,14 +9,14 @@ public class Maze {
     private final Map<String, Cave> caves;
     int cavesWithArrows;
 
-    public Maze() {
+    public Maze(GameModes gameMode) {
         this.root = new Cave(new Coordinate(0, 0));
         this.caves = new HashMap<>();
         this.caves.put(this.root.coordinate.toString(), this.root);
         this.size = 1;
         this.cavesWithArrows = 0;
 
-        this.visualMaze = new VisualMaze(this.root);
+        this.visualMaze = new VisualMaze(this.root, gameMode);
     }
 
     public VisualMaze getVisualMaze() {
@@ -174,7 +174,7 @@ public class Maze {
 
     public void putPlayerInRandomCave(){
         List<Cave> caveList = new ArrayList<>(caves.values());
-        Cave cave = caveList.get(randInt(0, caves.size()) - 1);
+        Cave cave = caveList.get(Math.abs(randInt(0, caveList.size()) - 1));
         this.visualMaze.registerPlayerMovement(player.currentCave, cave);
         this.player.currentCave = cave;
     }
