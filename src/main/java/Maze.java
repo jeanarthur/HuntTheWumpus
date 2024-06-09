@@ -19,10 +19,6 @@ public class Maze {
         this.visualMaze = new VisualMaze(this.root, gameMode);
     }
 
-    public VisualMaze getVisualMaze() {
-        return visualMaze;
-    }
-
     public void setPlayer(Player player) {
         this.player = player;
         this.player.currentCave = this.root;
@@ -43,8 +39,6 @@ public class Maze {
         caves.add(this.root);
 
         int limitSize = randInt(20, 30);
-        // System.out.println("Cave expected size: " + limitSize);
-        // System.out.println("1 - " + this.root.objectToString());
         while (this.size < limitSize){
             int iterations = randInt(1, 4);
             Cave currentParent = caves.remove(0);
@@ -60,7 +54,6 @@ public class Maze {
         }
 
         this.addEnemies();
-        // System.out.println("Cave real size: " + this.size);
     }
 
     private Cave insertNewCave(Cave parent, Coordinates coordinate) {
@@ -72,7 +65,6 @@ public class Maze {
         this.connectCaves(newCave);
 
         this.size++;
-        // System.out.println(this.size + " - " + newCave.objectToString());
         return newCave;
     }
 
@@ -89,31 +81,6 @@ public class Maze {
             }
         }
 
-    }
-
-    private void connectCaves(Cave parent, Cave newCave, Coordinates coordinate){
-        Coordinates parentCoordinate = Coordinates.getOpposite(coordinate);
-
-        if (parent == null || (parent.get(coordinate) != null && parent.get(coordinate).equals(newCave))){
-            return;
-        }
-
-        parent.set(newCave, coordinate);
-        newCave.set(parent, parentCoordinate);
-        this.visualMaze.createVisualConnection(parent, newCave);
-
-        Coordinates parentClockwiseCoordinate = Coordinates.getNextClockwiseCoordinate(coordinate);
-        Coordinates parentOppositeClockwiseCoordinate = Coordinates.getOpposite(parentClockwiseCoordinate);
-
-        Cave parentClockwiseCoordinateCave = parent.get(parentClockwiseCoordinate);
-        if (parentClockwiseCoordinateCave != null){
-            connectCaves(parentClockwiseCoordinateCave.get(coordinate), newCave, parentOppositeClockwiseCoordinate);
-        }
-
-        Cave parentOppositeClockwiseCoordinateCave = parent.get(parentOppositeClockwiseCoordinate);
-        if (parentOppositeClockwiseCoordinateCave != null){
-            connectCaves(parentOppositeClockwiseCoordinateCave.get(coordinate), newCave, parentClockwiseCoordinate);
-        }
     }
 
     private void addEnemies(){

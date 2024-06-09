@@ -114,35 +114,19 @@ public class VisualMaze {
     public void updateElementSymbol(Cave cave) {
         MazeElement currentElement = elements.get(cave.toString());
         MazeElement updatedElement = this.defineMazeElementToCave(cave, currentElement.x, currentElement.y);
-//        updatedElement.discovered = true;
         elements.put(cave.toString(), updatedElement);
-    }
-
-    public void updateElementSymbol(Cave cave, String symbol) {
-        MazeElement mazeElement = elements.get(cave.toString());
-        mazeElement.symbol = symbol;
-        elements.put(cave.toString(), mazeElement);
     }
 
     public void updateElementSymbol(Cave cave, String symbol, Color color) {
         MazeElement mazeElement = elements.get(cave.toString());
         mazeElement.symbol = symbol;
         mazeElement.color = color;
-//        mazeElement.discovered = true;
         elements.put(cave.toString(), mazeElement);
-    }
-
-    public void updateElementSymbol(String elementId, String symbol, Color color){
-        MazeElement mazeElement = elements.get(elementId);
-        mazeElement.symbol = symbol;
-        mazeElement.color = color;
-        elements.put(elementId, mazeElement);
     }
 
     public void updateElementColor(String elementId, Color color){
         MazeElement mazeElement = elements.get(elementId);
         mazeElement.color = color;
-//        mazeElement.discovered = true;
         elements.put(elementId, mazeElement);
     }
 
@@ -181,8 +165,6 @@ public class VisualMaze {
         int mapHeight = getHeight();
         int mapWidth = getWidth();
         String[][] map = new String[mapHeight][mapWidth];
-
-        // System.out.printf("Dimensões: %d x %d\n", mapHeight, mapWidth);
 
         for (MazeElement mazeElement : elements.values()){
             if (mazeElement.visible){

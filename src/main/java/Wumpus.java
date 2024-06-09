@@ -1,2 +1,2 @@
-public class Wumpus extends Enemy{
+public class Wumpus extends Enemy {
 }

@@ -1,2 +1,2 @@
-public class Hole extends Enemy{
+public class Hole extends Enemy {
 }

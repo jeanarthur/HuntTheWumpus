@@ -1,2 +1,2 @@
-public class Arrow extends Enemy{
+public class Arrow extends Enemy {
 }

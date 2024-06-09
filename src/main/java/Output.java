@@ -100,10 +100,6 @@ public class Output {
         System.out.println(Color.GREEN.value() + "Capturou o Wumpus" + Color.RESET.value());
     }
 
-    public void showDefeatedBatMessage() {
-        System.out.println("Eliminou um morcego");
-    }
-
     public void showNoArrowsAvailableMessage() {
         System.out.println(Color.RED.value() + "Acabou as flechas do player e não há mais flechas no mapa" + Color.RESET.value());
     }
