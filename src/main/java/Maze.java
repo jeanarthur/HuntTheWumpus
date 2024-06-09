@@ -16,6 +16,10 @@ public class Maze {
         this.visualMaze = new VisualMaze(this.root);
     }
 
+    public VisualMaze getVisualMaze() {
+        return visualMaze;
+    }
+
     public void setPlayer(Player player) {
         this.player = player;
         this.player.currentCave = this.root;
@@ -46,6 +50,8 @@ public class Maze {
                 }
             }
         }
+
+        this.addEnemies();
         // System.out.println("Cave real size: " + this.size);
     }
 
@@ -87,8 +93,42 @@ public class Maze {
         }
     }
 
-    public VisualMaze getVisualMaze() {
-        return visualMaze;
+    private void addEnemies(){
+        MazeNavigator mazeNavigator = new MazeNavigator();
+        List<Cave> caveList = mazeNavigator.getCaveList(this.root);
+        caveList.remove(this.root);
+
+        int enemyProportion_bat = (int)Math.floor(this.size * 0.25);
+        int limitEnemy_bat = randInt((int)(Math.ceil(enemyProportion_bat * 0.5)), enemyProportion_bat);
+
+        int batCount = 0;
+        while (batCount < limitEnemy_bat) {
+            Cave cave = caveList.get(randInt(0, caveList.size() - 1));
+            if (cave.getEnemy() == null){
+                cave.setEnemy(new Bat());
+                caveList.remove(cave);
+                batCount++;
+                visualMaze.updateElementSymbol(cave);
+            }
+        }
+
+        int enemyProportion_hole = (int)Math.floor(this.size * 0.15);
+        int limitEnemy_hole = randInt((int)(Math.ceil(enemyProportion_hole * 0.5)), enemyProportion_hole);
+
+        int holeCount = 0;
+        while (holeCount < limitEnemy_hole) {
+            Cave cave = caveList.get(randInt(0, caveList.size() - 1));
+            if (cave.getEnemy() == null){
+                cave.setEnemy(new Hole());
+                caveList.remove(cave);
+                holeCount++;
+                visualMaze.updateElementSymbol(cave);
+            }
+        }
+
+        Cave cave = caveList.get(randInt(0, caveList.size() - 1));
+        cave.setEnemy(new Wumpus());
+        visualMaze.updateElementSymbol(cave);
     }
 
     public void playerMoveTo (Coordinates coordinate){

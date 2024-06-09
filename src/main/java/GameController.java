@@ -31,8 +31,8 @@ public class GameController {
         while (true) {
             Map<String, ValidInput> validInputMap = input.getValidInputMap(player.currentCave);
 
-            ValidInput userValidInput;
-            while (true) {
+            ValidInput userValidInput = null;
+            while (userValidInput == null) {
                 output.showSeparator();
                 map.print();
                 output.showSeparator();
@@ -42,11 +42,10 @@ public class GameController {
 
                 String option = input.get();
                 userValidInput = validInputMap.get(option);
-                if (userValidInput != null){
-                    break;
-                }
 
-                output.showInputError();
+                if (userValidInput == null){
+                    output.showInputError();
+                }
             }
 
             if (userValidInput.value != null){

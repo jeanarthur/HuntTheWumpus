@@ -6,6 +6,10 @@ public enum Coordinates {
     SOUTH;
 
     public static Coordinates getOpposite(Coordinates coordinate){
+        if (coordinate == null){
+            return null;
+        }
+
         switch (coordinate){
             case NORTH -> {
                 return SOUTH;
