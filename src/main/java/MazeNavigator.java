@@ -5,7 +5,7 @@ public class MazeNavigator {
 
     public List<Cave> getCaveList(Cave root){
         List<Cave> list = new ArrayList<>();
-        getCaves(root.getNorth(), null, list);
+        getCaves(root, null, list);
         return list;
     }
 

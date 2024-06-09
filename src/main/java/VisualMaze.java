@@ -13,7 +13,7 @@ public class VisualMaze {
 
     public VisualMaze(Cave root) {
         this.elements = new HashMap<>();
-        this.elements.put(root.toString(), new MazeElement("C", 0, 0));
+        this.elements.put(root.toString(), new MazeElement("R", 0, 0, Color.GREEN));
 
         this.TRACK_PLAYER_MOVEMENT = true;
         this.SHOW_CAVE_ENEMIES = true;
@@ -75,29 +75,29 @@ public class VisualMaze {
     }
 
     public void updateElementSymbol(Cave cave, String symbol) {
-        MazeElement mapElement = elements.get(cave.toString());
-        mapElement.symbol = symbol;
-        elements.put(cave.toString(), mapElement);
+        MazeElement mazeElement = elements.get(cave.toString());
+        mazeElement.symbol = symbol;
+        elements.put(cave.toString(), mazeElement);
     }
 
     public void updateElementSymbol(Cave cave, String symbol, Color color) {
-        MazeElement mapElement = elements.get(cave.toString());
-        mapElement.symbol = symbol;
-        mapElement.color = color;
-        elements.put(cave.toString(), mapElement);
+        MazeElement mazeElement = elements.get(cave.toString());
+        mazeElement.symbol = symbol;
+        mazeElement.color = color;
+        elements.put(cave.toString(), mazeElement);
     }
 
     public void updateElementSymbol(String elementId, String symbol, Color color){
-        MazeElement mapElement = elements.get(elementId);
-        mapElement.symbol = symbol;
-        mapElement.color = color;
-        elements.put(elementId, mapElement);
+        MazeElement mazeElement = elements.get(elementId);
+        mazeElement.symbol = symbol;
+        mazeElement.color = color;
+        elements.put(elementId, mazeElement);
     }
 
     public void updateElementColor(String elementId, Color color){
-        MazeElement mapElement = elements.get(elementId);
-        mapElement.color = color;
-        elements.put(elementId, mapElement);
+        MazeElement mazeElement = elements.get(elementId);
+        mazeElement.color = color;
+        elements.put(elementId, mazeElement);
     }
 
     public void registerPlayerMovement(Cave from, Cave to) {
@@ -105,8 +105,8 @@ public class VisualMaze {
         this.updateElementSymbol(to, "P", Color.YELLOW);
 
         if (this.TRACK_PLAYER_MOVEMENT){
-            MazeElement mapElement = elements.get(from + to.toString());
-            if (mapElement != null){
+            MazeElement mazeElement = elements.get(from + to.toString());
+            if (mazeElement != null){
                 updateElementColor(from + to.toString(), Color.CYAN);
             } else {
                 updateElementColor(to + from.toString(), Color.CYAN);
@@ -125,8 +125,8 @@ public class VisualMaze {
 
         // System.out.printf("Dimensões: %d x %d\n", mapHeight, mapWidth);
 
-        for (MazeElement mapElement : elements.values()){
-            map[Math.abs(mapElement.y - fixY)][mapElement.x + fixX] = (mapElement.color != null ? mapElement.color.value() : "") + mapElement.symbol + Color.RESET.value();
+        for (MazeElement mazeElement : elements.values()){
+            map[Math.abs(mazeElement.y - fixY)][mazeElement.x + fixX] = (mazeElement.color != null ? mazeElement.color.value() : "") + mazeElement.symbol + Color.RESET.value();
         }
 
         for (int i = 0; i < mapHeight; i++) {
@@ -145,9 +145,9 @@ public class VisualMaze {
         int minX = 0;
         int maxX = 0;
 
-        for (MazeElement mapElement : elements.values()){
-            minX = Math.min(minX, mapElement.x);
-            maxX = Math.max(maxX, mapElement.x);
+        for (MazeElement mazeElement : elements.values()){
+            minX = Math.min(minX, mazeElement.x);
+            maxX = Math.max(maxX, mazeElement.x);
         }
 
         fixX = Math.abs(minX);
@@ -158,9 +158,9 @@ public class VisualMaze {
         int minY = 0;
         int maxY = 0;
 
-        for (MazeElement mapElement : elements.values()){
-            minY = Math.min(minY, mapElement.y);
-            maxY = Math.max(maxY, mapElement.y);
+        for (MazeElement mazeElement : elements.values()){
+            minY = Math.min(minY, mazeElement.y);
+            maxY = Math.max(maxY, mazeElement.y);
         }
 
         fixY = maxY;

@@ -1,16 +1,17 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Maze {
 
     Cave root;
     int size;
-    private VisualMaze visualMaze;
+    private final VisualMaze visualMaze;
     private Player player;
+    private final Map<String, Cave> caves;
 
     public Maze() {
-        this.root = new Cave();
+        this.root = new Cave(new Coordinate(0, 0));
+        this.caves = new HashMap<>();
+        this.caves.put(this.root.coordinate.toString(), this.root);
         this.size = 1;
 
         this.visualMaze = new VisualMaze(this.root);
@@ -26,7 +27,7 @@ public class Maze {
         this.visualMaze.updateElementSymbol(this.root, "P", Color.YELLOW);
     }
 
-    public int randInt(int min, int max) {
+    private int randInt(int min, int max) {
         return new Random().nextInt((max - min) + 1) + min;
     }
 
@@ -47,6 +48,7 @@ public class Maze {
                 Cave inserted = insertNewCave(currentParent, coordinates[coordinateIndex]);
                 if (inserted != null){
                     caves.add(inserted);
+                    this.caves.put(inserted.coordinate.toString(), inserted);
                 }
             }
         }
@@ -60,12 +62,27 @@ public class Maze {
             return null;
         }
 
-        Cave newCave = new Cave();
-        this.connectCaves(parent, newCave, coordinate);
+        Cave newCave = new Cave(Coordinate.next(parent.coordinate, coordinate));
+        this.connectCaves(newCave);
 
         this.size++;
         // System.out.println(this.size + " - " + newCave.objectToString());
         return newCave;
+    }
+
+    private void connectCaves(Cave newCave){
+        Coordinate newCaveCoordinate = newCave.coordinate;
+
+        for(Coordinates direction : Coordinates.values()){
+            Coordinate coordinate = Coordinate.next(newCaveCoordinate, direction);
+            if (caves.containsKey(coordinate.toString())) {
+                Cave cave = caves.get(coordinate.toString());
+                newCave.set(cave, direction);
+                cave.set(newCave, Coordinates.getOpposite(direction));
+                this.visualMaze.createVisualConnection(cave, newCave);
+            }
+        }
+
     }
 
     private void connectCaves(Cave parent, Cave newCave, Coordinates coordinate){
@@ -94,8 +111,7 @@ public class Maze {
     }
 
     private void addEnemies(){
-        MazeNavigator mazeNavigator = new MazeNavigator();
-        List<Cave> caveList = mazeNavigator.getCaveList(this.root);
+        List<Cave> caveList = new ArrayList<>(caves.values());
         caveList.remove(this.root);
 
         int enemyProportion_bat = (int)Math.floor(this.size * 0.25);

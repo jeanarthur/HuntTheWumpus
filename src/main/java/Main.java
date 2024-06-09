@@ -43,6 +43,13 @@ public class Main {
 //        map.generate();
 //        map.print();
 
+//        for(int i = 0; i < 100; i++){
+//            Maze maze = new Maze();
+//            maze.generate();
+//            maze.print();
+//            System.out.println("===========================");
+//        }
+
     }
 
 }

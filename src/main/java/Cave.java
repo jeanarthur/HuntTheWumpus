@@ -5,8 +5,10 @@ public class Cave {
     private Cave east;
     private Cave west;
     private Enemy enemy;
+    Coordinate coordinate;
 
-    public Cave() {
+    public Cave(Coordinate coordinate) {
+        this.coordinate = coordinate;
     }
 
     public Cave(Cave north, Cave south, Cave east, Cave west) {
