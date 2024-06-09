@@ -33,8 +33,32 @@ public class Input {
             validInputMap.put("d", new ValidInput("d", "Mover para o leste", Coordinates.EAST));
         }
 
-        // validInputMap.put("e", new ValidInput("e", "Atirar flecha"));
+        validInputMap.put("e", new ValidInput("e", "Atirar flecha"));
+
         return validInputMap;
     }
+
+    public Map<String, ValidInput> getValidInputToArrow(Cave cave){
+        Map<String, ValidInput> validInputMap = new HashMap<>();
+
+        if (cave.getNorth() != null){
+            validInputMap.put("w", new ValidInput("w", "Atirar para o norte", Coordinates.NORTH));
+        }
+
+        if (cave.getWest() != null){
+            validInputMap.put("a", new ValidInput("a", "Atirar para o oeste", Coordinates.WEST));
+        }
+
+        if (cave.getSouth() != null){
+            validInputMap.put("s", new ValidInput("s", "Atirar para o sul", Coordinates.SOUTH));
+        }
+
+        if (cave.getEast() != null){
+            validInputMap.put("d", new ValidInput("d", "Atirar para o leste", Coordinates.EAST));
+        }
+
+        return validInputMap;
+    }
+
 
 }

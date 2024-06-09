@@ -44,4 +44,52 @@ public class Output {
         System.out.println("Escolha uma ação");
     }
 
+    public void showDiedByWumpusMessage() {
+        System.out.println("O Wumpus capturou o player");
+    }
+
+    public void showDefeatedByHoleMessage() {
+        System.out.println("O Player caiu em um poço sem fundo");
+    }
+
+    public void showNearWumpusMessage() {
+        System.out.println("O player consegue sentir o odor");
+    }
+
+
+    public void showNearBatMessage() {
+        System.out.println("O player consegue ouvir o bater das asas");
+    }
+
+    public void showNearHoleMessage() {
+        System.out.println("O player consegue sentir a brisa");
+    }
+
+    public void showMovedByBatMessage() {
+        System.out.println("Player foi pego por um morcego e levado a uma caverna aleatória");
+    }
+
+    public void showPlayerGetArrowMessage() {
+        System.out.println("Player encontrou uma flecha");
+    }
+
+    public void showPlayerArrowCount(Player player){
+        System.out.printf("O player possui %d flecha(s)\n", player.arrows);
+    }
+
+    public void showInsuficientArrows() {
+        System.out.println("Player não possui flechas");
+    }
+
+    public void showDefeatedWumpusMessage() {
+        System.out.println("Capturou o Wumpus");
+    }
+
+    public void showDefeatedBatMessage() {
+        System.out.println("Eliminou um morcego");
+    }
+
+    public void showNoArrowsAvailableMessage() {
+        System.out.println("Acabou as flechas do player e não há mais flechas no mapa");
+    }
 }

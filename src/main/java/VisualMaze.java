@@ -63,6 +63,8 @@ public class VisualMaze {
             return new MazeElement("P", x, y, Color.BLUE);
         } else if (enemyClass.equals(Wumpus.class)) {
             return new MazeElement("W", x, y, Color.RED);
+        } else if (enemyClass.equals(Arrow.class)){
+            return new MazeElement("F", x, y, Color.GREEN);
         }
 
         return new MazeElement("E", x, y, Color.RED);
@@ -108,7 +110,7 @@ public class VisualMaze {
             MazeElement mazeElement = elements.get(from + to.toString());
             if (mazeElement != null){
                 updateElementColor(from + to.toString(), Color.CYAN);
-            } else {
+            } else if (elements.get(to + from.toString()) != null) {
                 updateElementColor(to + from.toString(), Color.CYAN);
             }
 

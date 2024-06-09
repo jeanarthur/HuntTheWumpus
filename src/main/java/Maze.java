@@ -7,12 +7,14 @@ public class Maze {
     private final VisualMaze visualMaze;
     private Player player;
     private final Map<String, Cave> caves;
+    int cavesWithArrows;
 
     public Maze() {
         this.root = new Cave(new Coordinate(0, 0));
         this.caves = new HashMap<>();
         this.caves.put(this.root.coordinate.toString(), this.root);
         this.size = 1;
+        this.cavesWithArrows = 0;
 
         this.visualMaze = new VisualMaze(this.root);
     }
@@ -25,6 +27,10 @@ public class Maze {
         this.player = player;
         this.player.currentCave = this.root;
         this.visualMaze.updateElementSymbol(this.root, "P", Color.YELLOW);
+    }
+
+    public Player getPlayer(){
+        return this.player;
     }
 
     private int randInt(int min, int max) {
@@ -142,6 +148,19 @@ public class Maze {
             }
         }
 
+
+        this.cavesWithArrows = randInt(1, 3);
+        int arrowCount = 0;
+        while (arrowCount < cavesWithArrows) {
+            Cave cave = caveList.get(randInt(0, caveList.size() - 1));
+            if (cave.getEnemy() == null){
+                cave.setEnemy(new Arrow());
+                caveList.remove(cave);
+                arrowCount++;
+                visualMaze.updateElementSymbol(cave);
+            }
+        }
+
         Cave cave = caveList.get(randInt(0, caveList.size() - 1));
         cave.setEnemy(new Wumpus());
         visualMaze.updateElementSymbol(cave);
@@ -151,6 +170,13 @@ public class Maze {
         Cave from = this.player.currentCave;
         this.player.navigate(coordinate);
         this.visualMaze.registerPlayerMovement(from, this.player.currentCave);
+    }
+
+    public void putPlayerInRandomCave(){
+        List<Cave> caveList = new ArrayList<>(caves.values());
+        Cave cave = caveList.get(randInt(0, caves.size()) - 1);
+        this.visualMaze.registerPlayerMovement(player.currentCave, cave);
+        this.player.currentCave = cave;
     }
 
     public void print() {
