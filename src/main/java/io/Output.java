@@ -39,6 +39,14 @@ public class Output {
                 morcegos te levarão para cavernas aleatórias
                 poços sem fundo são letais, assim como encontrar o Wumpus
                 ---
+                Símbolos no mapa:
+                J -> Jogador
+                C -> Caverna
+                M -> Morcego
+                P -> Poço sem fundo
+                W -> Wumpus
+                F -> Flecha
+                ---
                 Divirta-se!""");
     }
 

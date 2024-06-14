@@ -101,7 +101,7 @@ public class VisualMaze {
         String symbol = "C";
         Colors color = Colors.RESET;
         if (enemyClass.equals(Bat.class)) {
-            symbol = (this.SHOW_ALL_CAVE_ENEMIES || (this.SHOW_DISCOVERED_ENEMIES && hasDiscovered)) ? "B" : symbol;
+            symbol = (this.SHOW_ALL_CAVE_ENEMIES || (this.SHOW_DISCOVERED_ENEMIES && hasDiscovered)) ? "M" : symbol;
             color = (this.SHOW_ALL_CAVE_ENEMIES || (this.SHOW_DISCOVERED_ENEMIES && hasDiscovered)) ? Colors.PURPLE : color;
         } else if (enemyClass.equals(Hole.class)){
             symbol = (this.SHOW_ALL_CAVE_ENEMIES || (this.SHOW_DISCOVERED_ENEMIES && hasDiscovered)) ? "P" : symbol;
@@ -143,7 +143,7 @@ public class VisualMaze {
 
         elements.get(to.toString()).visible = true;
         elements.get(to.toString()).discovered = true;
-        this.updateElementSymbol(to, "P", Colors.YELLOW);
+        this.updateElementSymbol(to, "J", Colors.YELLOW);
 
         if (this.TRACK_PLAYER_MOVEMENT){
             MazeElement mazeElement = elements.get(from + to.toString());
